@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nif-pt-generator", "nif-pt-generator\nif-pt-generator.csproj", "{3950E478-8AE6-4452-98F6-94C7C916083E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3950E478-8AE6-4452-98F6-94C7C916083E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3950E478-8AE6-4452-98F6-94C7C916083E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3950E478-8AE6-4452-98F6-94C7C916083E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3950E478-8AE6-4452-98F6-94C7C916083E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BE833CB9-E3B3-4322-8F79-DA1FF8F22852}
+	EndGlobalSection
+EndGlobal
