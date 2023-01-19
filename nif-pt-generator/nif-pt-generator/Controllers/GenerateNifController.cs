@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Text.RegularExpressions;
+using nif_pt_generator.Services;
 
 namespace nif_pt_generator.Controllers
 {
@@ -7,10 +7,8 @@ namespace nif_pt_generator.Controllers
     [Route("[controller]")]
     public class GenerateNifController : ControllerBase
     {
-        public int tamanhoNumero = 9;
-
-        [HttpGet(Name = "GetNif")]
-        public int GetNif(int typeNIF)
+        [HttpGet(Name = "Generate")]
+        public int Generate(int typeNIF)
         {
             /* 
                 typeNIF equals:
@@ -30,67 +28,14 @@ namespace nif_pt_generator.Controllers
                 99: Sociedades civis sem personalidade jurídica.
              */
 
-            var sequence = Enumerable.Range(1, 10).OrderBy(n => n * n * (new Random()).Next());
+            return GenerateNifServices.GenerateNif(typeNIF);
 
-            string nif = typeNIF.ToString();
-            int quantidadeAleatorio = 7;
-            if (nif.Length == 2)
-            {
-                quantidadeAleatorio = 6;
-            }
-
-            for (int i = 0; i < quantidadeAleatorio; i++)
-            {
-                nif = nif + (new Random()).Next(10);
-            }
-
-            string filteredNumber = Regex.Match(nif, @"[0-9]+").Value;
-
-            int calculoCheckSum = 0;
-
-            for (int i = 0; i < tamanhoNumero - 1; i++)
-            {
-                calculoCheckSum += (int.Parse(filteredNumber[i].ToString())) * (tamanhoNumero - i);
-            }
-
-            int digitoVerificacao = 11 - (calculoCheckSum % 11);
-
-            if (digitoVerificacao > 9)
-            {
-                digitoVerificacao = 0;
-            }
-
-            nif = nif + digitoVerificacao;
-
-            return Convert.ToInt32(nif);
         }
 
-        [HttpPost(Name = "ValidaNif")]
-        public bool ValidaNif(string nifNumber)
+        [HttpPost(Name = "IsValid")]
+        public bool IsValid(string nifNumber)
         {
-            string filteredNumber = Regex.Match(nifNumber, @"[0-9]+").Value;
-
-            if (filteredNumber.Length != tamanhoNumero || int.Parse(filteredNumber[0].ToString()) == 0)
-            {
-                return false;
-            }
-
-            int calculoCheckSum = 0;
-
-            for (int i = 0; i < tamanhoNumero - 1; i++)
-            {
-                calculoCheckSum += (int.Parse(filteredNumber[i].ToString())) * (tamanhoNumero - i);
-            }
-
-            int digitoVerificacao = 11 - (calculoCheckSum % 11);
-
-            if (digitoVerificacao > 9)
-            {
-                digitoVerificacao = 0;
-            }
-
-            return digitoVerificacao == int.Parse(filteredNumber[tamanhoNumero - 1].ToString());
-
+            return GenerateNifServices.IsValid(nifNumber);
         }
     }
 }
